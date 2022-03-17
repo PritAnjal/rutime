@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4aadcc58-2505-4889-9081-fc8b1a7de465" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="4439aeb4-e176-4c7f-a7fd-dcb8b17b0c72" file="${env}.yaml" />
+	<flow name="Copy_of_runtimeenvpassFlow" doc:id="84945cf5-e643-4878-a357-1107d404f649" >
+		<http:listener doc:name="Copy_of_Listener" doc:id="0e85187b-51b4-4ea5-aa50-bd2404e85d9f" config-ref="HTTP_Listener_config" path="/runEnv" />
+		<logger level="INFO" doc:name="Copy_of_Logger" doc:id="dd22ce8f-984c-4742-84b6-14e685eb1a43" message="${env.name}" />
+		<set-variable value="${env.name}" doc:name="Copy_of_Set Variable" doc:id="bed46613-8883-416d-9a04-bfeec66ff0fc" variableName="environment" />
+		<choice doc:name="Copy_of_Choice" doc:id="0883889d-bb9c-4840-91cd-a5b671902d12" >
+			<when expression='#[vars.environment == "Prod"]' >
+				<logger level="INFO" doc:name="Copy_of_Logger" doc:id="344d99a1-b084-4aeb-a2eb-e489540a6902" message="Prod Env" />
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Copy_of_Logger" doc:id="984d45f2-e65e-472e-a3df-2dd3604f1cfd" message="non-prod env" />
+			</otherwise>
+		</choice>
+	</flow>
+</mule>
