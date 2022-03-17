@@ -37,7 +37,7 @@
 						<username>${username}</username>
 						<password>${password}</password>
 						<applicationName>${applicationName}</applicationName>
-						<env>${environment}</env>
+						<environment>${environment}</environment>
 						<businessGroup>${businessGroup}</businessGroup>
 						<workerType>${workerType}</workerType>
 						<objectStoreV2>true</objectStoreV2>
